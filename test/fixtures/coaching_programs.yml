@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: "Program One"
+  description: "Description for Program One"
+  user: one
+  coach: two
+
+two:
+  name: "Program Two"
+  description: "Description for Program Two"
+  user: two
+  coach: one
