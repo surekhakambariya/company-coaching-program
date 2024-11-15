@@ -105,15 +105,15 @@ const Home = () => {
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <div className="flex">
                       <p className="text-gray-900 whitespace-no-wrap">
-                        {companyProgram.coaching_program.name}
+                        {companyProgram['coaching_program']['name']}
                       </p>
                     </div>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">{companyProgram.coaching_program.description}</p>
+                    <p className="text-gray-900 whitespace-no-wrap">{companyProgram['coaching_program']['description']}</p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">{companyProgram.coach.email}</p>
+                    <p className="text-gray-900 whitespace-no-wrap">{companyProgram['coach']['email']}</p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">

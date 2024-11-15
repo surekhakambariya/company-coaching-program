@@ -57,6 +57,8 @@ class Admin::UsersController < ApplicationController
     if current_user.coach?
       c_programs = current_user.coaching_programs.map { |coaching_program| coaching_program.as_json.merge(user_count: coaching_program.company_programs.map { |cp| cp.coaching_program_enrollments.count }.sum) }
       render json: { coaching_programs: c_programs }
+    else
+      render json: { coaching_programs: [] }
     end
   end
 
@@ -67,9 +69,10 @@ class Admin::UsersController < ApplicationController
       company = current_user.company
       programs = company.company_programs if company.present?
       enrolled_programs = current_user.coaching_program_enrollments.as_json(include: { company_program: { include: %i[coach coaching_program] } })
-      render json: { company_programs: programs, enroll_program: enrolled_programs }
+      render json: { company_programs: programs.as_json(include: %i[coaching_program coach]), enroll_programs: enrolled_programs }
+    else
+      render json: { company_programs: programs, enroll_programs: current_user.coaching_program_enrollments }
     end
-    render json: { company_programs: programs, enroll_program: current_user.coaching_program_enrollments }
   end
 
   def join_company_program
