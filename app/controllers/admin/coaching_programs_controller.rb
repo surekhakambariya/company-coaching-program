@@ -2,11 +2,11 @@ class Admin::CoachingProgramsController < ApplicationController
   before_action :find_coaching_program, only: %i[show update destroy]
 
   def index
-    @coaching_programs = CoachingProgram.all.order(created_at: :desc)
+    @coaching_programs = CoachingProgram.includes(:coach).all.order(created_at: :desc)
     if params[:company_id]
       @coaching_programs = @coaching_programs.where(user_id: params[:company_id])
     end
-    if @coaching_programs
+    if @coaching_programs.any?
       render json: @coaching_programs.as_json(include: :coach)
     else
       render json: { error: "No coaching programs found" }, status: :not_found

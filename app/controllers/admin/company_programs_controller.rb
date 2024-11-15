@@ -3,9 +3,8 @@ class Admin::CompanyProgramsController < ApplicationController
   before_action :find_company_program, only: %i[show update destroy]
 
   def index
-    # TODO: Refector this method to use ActiveRecord's eager loading or include associations
-    @company_programs = @company.company_programs.all
-    if @company_programs
+    @company_programs = @company.company_programs.includes(:coaching_program, :coach)
+    if @company_programs.any?
       render json: @company_programs.as_json(include: %i[coaching_program coach])
     else
       render json: { error: "No company programs found" }, status: :not_found

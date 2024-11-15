@@ -6,4 +6,7 @@ class Company < ApplicationRecord
 
   # Validations
   validates :name, presence: true
+
+  # Scopes
+  scope :ordered, -> { order(created_at: :desc) }
 end

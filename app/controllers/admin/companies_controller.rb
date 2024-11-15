@@ -2,9 +2,9 @@ class Admin::CompaniesController < ApplicationController
   before_action :find_company, only: %i[show update destroy]
 
   def index
-    @companies = Company.all.order(created_at: :desc)
-    if @companies
-      render json: @companies
+    @companies = Company.includes(:company_programs).order(created_at: :desc)
+    if @companies.any?
+      render json: @companies.as_json(include: :company_programs)
     else
       render json: { error: "No companies found" }, status: :not_found
     end
